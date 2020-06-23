@@ -3,7 +3,11 @@ var COMMENTID = 0
 var posts = new Database('posts')
 
 function displayAllPosts() {
-	for (var post of posts.getAll()) {
+	var allPosts = posts.getAll()
+	allPosts.sort(function(post1, post2) {
+		return post1.likes.length - post2.likes.length
+	})
+	for (var post of allPosts) {
 		var elem = createPost(post)
 		addNewPost(elem)
 	}
@@ -58,7 +62,6 @@ function createPost(post) {
 					add comment
 				</button>
 				<div class="comments_feed">
-				</div>
 			</div>
 		</div>
 	`
@@ -115,6 +118,7 @@ function newLike(postId) {
 		var postLikes = postElem.querySelector('div.post_likes_info')
 		var postLikesCountElem = postLikes.querySelector('span.post_likes_count')
 		postLikesCountElem.innerText = post.likes.length
+	}
 }
 
 function addNewPost(elem) {
