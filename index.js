@@ -2,6 +2,16 @@ var COMMENTID = 0
 
 var posts = new Database('posts')
 
+function displayAllPosts() {
+	for (var post of posts.getAll()) {
+		var elem = createPost(post)
+		addNewPost(elem)
+	}
+}
+
+
+displayAllPosts()
+
 function newPost() {
 	var post = posts.create({
 		text: getPostText(),
