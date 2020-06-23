@@ -43,13 +43,22 @@
 	</div>
 	<script type="text/javascript" src="./database.js"></script>
 	<script>
-
+		function getValue(query) {
+			return document.querySelector(query).value
+		}
+		var users = new Database('users')
+		
 		function login() {
 			localStorage.setItem('status', 'loggedin')
 			window.location = "./index.html"
 		}
-
+		
 		function register() {
+			var user = {
+				username: getValue('input#username'),
+				password: getValue('input#password')
+			}
+			users.create(user)
 		}
 	</script>
 </body>
